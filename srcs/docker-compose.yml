@@ -1,17 +1,62 @@
-version: '3.8'
-
 services:
-  # nginx:
-  #   build:
-  #     context: requirements/nginx/
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "443:443"
+  nginx:
+    image: nginx:tmiftah
+    container_name: nginx
+    build:
+      context: requirements/nginx/
+      dockerfile: Dockerfile 
+    ports:
+      - "443:443"
+    env_file:
+      - .env
+    depends_on:
+      - wordpress
+    networks:
+      - my-network
+    volumes:
+      - wordpress:/var/www/html
+    restart: always
   mariadb:
+    image: mariadb:tmiftah
+    container_name: mariadb
     build:
       context: requirements/mariadb/
       dockerfile: Dockerfile
-    ports:
-      - "3306:3306"
     env_file:
-      - ./.env
+      - .env
+    networks:
+      - my-network
+    volumes:
+      - mariadb:/var/lib/mysql
+    restart: always
+  wordpress:
+    image: wordpress:tmiftah
+    container_name: wordpress
+    build:
+      context: requirements/wordpress/
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    depends_on:
+      - mariadb
+    networks:
+      - my-network
+    volumes:
+      - wordpress:/var/www/html
+    restart: always
+volumes:
+  wordpress:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/tmiftah/data/wordpress
+  mariadb:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/tmiftah/data/mariadb
+networks:
+  my-network:
+    driver: bridge
