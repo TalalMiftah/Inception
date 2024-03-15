@@ -6,4 +6,10 @@ up:
 down:
 	docker-compose -f ${DOCKER_COMPOSE} down
 
-PHONY: up down
+start:
+	docker-compose -f ${DOCKER_COMPOSE} start
+
+stop:
+	docker-compose -f ${DOCKER_COMPOSE} stop
+
+PHONY: up down start stop
