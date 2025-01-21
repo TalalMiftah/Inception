@@ -110,7 +110,8 @@ sequenceDiagram
 
 2 - WordPress + PHP-FPM
 
-![alt text](https://github.com/TalalMiftah/INCEPTION/blob/main/images/pfp.png?raw=true) ![alt text](https://github.com/TalalMiftah/INCEPTION/blob/main/images/wordpress.png?raw=true)
+<img src="https://github.com/TalalMiftah/INCEPTION/blob/main/images/pfp.png?raw=true" alt="Alt Text" height="120px"> <img src="https://github.com/TalalMiftah/INCEPTION/blob/main/images/wordpress.png?raw=true" alt="Alt Text" height="120px">
+
 - **What it is:**  A content management system (WordPress) with PHP FastCGI Process Manager
 - **Role in project:**
   - Provides the actual website functionality
