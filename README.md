@@ -107,3 +107,47 @@ sequenceDiagram
     C-->>S: Encrypted Application Data
     S-->>C: Encrypted Application Data
 ```
+
+2 - WordPress + PHP-FPM
+
+![alt text](https://github.com/TalalMiftah/INCEPTION/blob/main/images/pfp.png?raw=true) ![alt text](https://github.com/TalalMiftah/INCEPTION/blob/main/images/wordpress.png?raw=true)
+- **What it is:**  A content management system (WordPress) with PHP FastCGI Process Manager
+- **Role in project:**
+  - Provides the actual website functionality
+  - Handles dynamic content generation
+  - Processes PHP code
+- **Why we use it:**
+  - WordPress makes website management easy
+  - PHP-FPM is efficient for processing PHP
+  - Separating PHP processing from the web server is good practice
+
+3 - MariaDB
+
+- **What it is:**  A database server (fork of MySQL)
+- **Role in project:**
+  - Stores all WordPress data
+  - Manages user accounts
+  - Handles database operations
+- **Why we use it:**
+  - Reliable and secure database system
+  - Fully compatible with WordPress
+  - Open-source alternative to MySQL
+
+4 - Docker Volumes
+
+- **What it is:** Persistent storage spaces for container data
+- **Role in project:**
+  - Volume 1: Stores WordPress database data
+  - Volume 2: Stores WordPress files
+- **Why we use it:**
+  - Data persists even if containers are destroyed
+  - Can be backed up easily
+  - Shared storage between containers
+### How They Work Together:
+1. User connects to NGINX via HTTPS (port 443).
+2. NGINX forwards the request to WordPress container.
+3. WordPress processes the request using PHP-FPM.
+4. If needed, WordPress talks to MariaDB for data.
+5. Response flows back through NGINX to the user.
+
+This architecture follows the principle of "separation of concerns" - each service does one specific job and does it well, making the system more maintainable and secure.
